@@ -68,8 +68,8 @@ def start_video_stream(faceNet, maskNet):
             (startX, startY, endX, endY) = box
             (mask, withoutMask) = pred
 
-            label = "Mask" if mask > withoutMask else "No Mask"
-            color = (0, 255, 0) if label == "Mask" else (0, 0, 255)
+            label = "With Face Mask" if mask > withoutMask else "Without Face Mask"
+            color = (0, 255, 0) if label == "With Face Mask" else (0, 0, 255)
 
             label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
 
@@ -93,7 +93,7 @@ face_weights_path = "./face_detector/res10_300x300_ssd_iter_140000.caffemodel"
 faceNet = cv2.dnn.readNet(face_prototxt_path, face_weights_path)
 # mask detector model
 # "./pretrained_mask_detector.model"
-mask_model_path = "./model2-007.model"
+mask_model_path = "./mask_detector.model"
 maskNet = load_model(mask_model_path)
 
 #Run video stream and face detection function
